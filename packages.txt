@@ -1,0 +1,7 @@
+DT
+data.table
+dplyr
+ggplot2
+scales
+shiny
+shinycssloaders
