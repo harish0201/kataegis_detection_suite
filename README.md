@@ -45,7 +45,7 @@ kataegis_detection_suite
 ├── kataegis_detect.R    # Detection library (core algorithm + utilities)
 ├── plots.R              # Rainfall plot rendering functions (ggplot2 + Base R)
 ├── packages.txt         # Required R package list
-└──  Readme.md            # This file
+└──  Readme.md           # This file
 ```
 
 ---
