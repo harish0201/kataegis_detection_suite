@@ -1,6 +1,6 @@
 # Kataegis Detection Suite
 
-A species-agnostic R-based toolkit for detecting and visualizing **kataegis** — localized clusters of hypermutation — from somatic variant data in Mutation Annotation Format (MAF) files. The suite includes a scriptable back-end library and an interactive Shiny web application for exploratory and publication-ready analysis.
+A species-agnostic R-based toolkit for detecting and visualizing **kataegis** - localized clusters of hypermutation - from somatic variant data in Mutation Annotation Format (MAF) files. The suite includes a scriptable back-end library and an interactive Shiny web application for exploratory and publication-ready analysis.
 
 ---
 
@@ -22,7 +22,7 @@ A species-agnostic R-based toolkit for detecting and visualizing **kataegis** �
 
 ## Overview
 
-Kataegis is a mutational phenomenon characterized by clusters of closely spaced, strand-coordinated mutations — typically C>T or C>G transitions at TpC dinucleotides — often attributed to APOBEC cytidine deaminase activity. This suite provides:
+Kataegis is a mutational phenomenon characterized by clusters of closely spaced, strand-coordinated mutations - typically C>T or C>G transitions at TpC dinucleotides - often attributed to APOBEC cytidine deaminase activity. This suite provides:
 
 - **Flexible detection** using either a fixed intermutation distance (IMD) threshold or a chromosome-adaptive dynamic cutoff
 - **Interactive analysis** via a Shiny app supporting per-sample and cohort-aggregated detection
@@ -96,22 +96,23 @@ Rscript -e "shiny::runApp('app.R')"
 
 ### App Walkthrough
 
-1. **Upload MAF File** — accepts `.maf`, `.tsv`, or `.txt` (case-insensitive). Required columns are listed in the [MAF File Format](#maf-file-format) section.
-2. **Upload Chromosome Lengths** *(optional)* — accepts `.txt`, `.tsv`, or `.fai`. If `.fai`, only the first two columns (chromosome name, size) are used.
-3. **Select Samples** — choose one, multiple, or all samples from the MAF. Leave blank to include all.
+1. **Upload MAF File** - accepts `.maf`, `.tsv`, or `.txt` (case-insensitive). Required columns are listed in the [MAF File Format](#maf-file-format) section.
+2. **Upload Chromosome Lengths** *(optional)* - accepts `.txt`, `.tsv`, or `.fai`. If `.fai`, only the first two columns (chromosome name, size) are used.
+3. **Select Samples** - choose one, multiple, or all samples from the MAF. Leave blank to include all.
 4. **Set Detection Mode:**
-   - `Per-sample` — runs detection independently on each selected sample
-   - `Aggregated` — pools all selected samples into a single pseudo-sample for cohort-level detection (analogous to `katdetectr` cohort mode)
+   - `Per-sample` - runs detection independently on each selected sample
+   - `Aggregated` - pools all selected samples into a single pseudo-sample for cohort-level detection (analogous to `katdetectr` cohort mode)
 5. **Set Analysis Parameters:**
-   - `Use Dynamic Cutoff` — enables chromosome-adaptive IMD thresholds (see [Algorithm Notes](#algorithm-notes))
-   - `Minimum Mutations per Cluster` — minimum SNPs to form a kataegis region (default: 6)
-   - `Maximum Avg Intermutation Distance` — IMD ceiling in bp when using fixed cutoff (default: 1000 bp)
+   - `Use Dynamic Cutoff` - enables chromosome-adaptive IMD thresholds (see [Algorithm Notes](#algorithm-notes))
+   - `Minimum Mutations per Cluster` - minimum SNPs to form a kataegis region (default: 6)
+   - `Maximum Avg Intermutation Distance` - IMD ceiling in bp when using fixed cutoff (default: 1000 bp)
 6. **Click ▶ Run Analysis**
-7. **Adjust Plot Settings** — log-scale Y axis, facet by chromosome — without rerunning detection
+7. **Adjust Plot Settings** - log-scale Y axis, facet by chromosome - without rerunning detection
 8. **Export Results:**
-   - `Download Plot (PNG)` — saves the rendered rainfall plot
-   - `Download Kataegis TSV` — saves the detected regions table
+   - `Download Plot (PNG)` - saves the rendered rainfall plot
+   - `Download Kataegis TSV` - saves the detected regions table
 
+Note - The shiny app has the advantage of being able to pool/aggregate the samples in any order you want. Feel free to explore both the app and the attached scripts. The shiny app sources both the detection and plotting script.
 ---
 
 ## Detection Module (`kataegis_detect.R`)
@@ -258,6 +259,7 @@ The MAF file must be tab-delimited and include the following columns:
 | `Variant_Classification`| Mutation classification (e.g., `Missense_Mutation`) |
 
 > TCGA-format MAF files are directly compatible. Only `SNP` rows are used for kataegis detection and rainfall plotting.
+> All the SNPs are considered.
 
 ---
 
@@ -270,6 +272,7 @@ source("plots.R")
 # 1. Detect kataegis with chromosome-adaptive cutoff
 results <- detect_kataegis(
   maf_file           = "cohort.maf",
+  sample_id          = "TCGA-AB-1234",
   use_dynamic_cutoff = TRUE,
   min_mutations      = 6
 )
@@ -321,7 +324,7 @@ $$\text{IMDcutoff} = \frac{-\ln\!\left(1 - \left(\frac{0.01}{W}\right)^{1/(N-1)}
 where:
 - \(W\) = chromosome width (true length if provided, else observed span)
 - \(N\) = number of SNPs on the chromosome
-- \(\lambda = \ln(2) / \text{median(IMDs)}\) — the modeled sample mutation rate
+- \(\lambda = \ln(2) / \text{median(IMDs)}\) - the modeled sample mutation rate
 
 The resulting cutoff is capped at 1000 bp to prevent overly permissive thresholds on low-coverage chromosomes. This formula originates from the **Pan-Cancer Analysis of Whole Genomes (PCAWG) Consortium** and is demonstrated as a custom IMD cutoff in the `katdetectr` vignette. It is more sensitive than a fixed 1000 bp threshold on densely mutated chromosomes.
 
@@ -335,7 +338,7 @@ The resulting cutoff is capped at 1000 bp to prevent overly permissive threshold
 
 The core sliding deque algorithm was originally devised by **Moritz Goretzky (WWU Münster)** and underlies the detection logic in [`maftools::detect_kataegis`](https://github.com/PoisonAlien/maftools) (Mayakonda et al.). The detection scaffolding in this project is structurally inspired by that implementation. `maftools` is distributed under the **MIT License**.
 
-> Detection logic adapted from `maftools` (MIT License) — Anand Mayakonda / PoisonAlien.  
+> Detection logic adapted from `maftools` (MIT License) - Anand Mayakonda / PoisonAlien.  
 > Original deque algorithm: Moritz Goretzky, WWU Münster.
 
 **Dynamic IMD cutoff (`IMDcutoffFun`)**
@@ -348,14 +351,14 @@ $$\text{IMDcutoff} = \frac{-\ln\!\left(1 - \left(\frac{0.01}{W}\right)^{1/(N-1)}
 
 where \(W\) is the segment/chromosome width, \(N\) is the number of variants, and \(\lambda = \ln(2) / \text{median(IMDs)}\) is the modeled sample mutation rate. The cutoff is capped at 1000 bp.
 
-> Dynamic IMD cutoff adapted from `katdetectr` vignette (GPL-3 License) — Rens JA et al. / ErasmusMC-CCBC.  
+> Dynamic IMD cutoff adapted from `katdetectr` vignette (GPL-3 License) - Rens JA et al. / ErasmusMC-CCBC.  
 > Original formula: Pan-Cancer Analysis of Whole Genomes (PCAWG) Consortium.
 
 ### Key Extensions Beyond Source Packages
 
 This suite adds the following capabilities not present in either maftools or katdetectr:
 
-- Species-agnostic design — no hardcoded reference genome (hg19/hg38)
+- Species-agnostic design - no hardcoded reference genome (hg19/hg38)
 - Multi-sample MAF processing in a single run
 - Chromosome-adaptive IMD cutoffs applied per-chromosome within a sample
 - Interactive Shiny application with per-sample and cohort-aggregated detection modes
