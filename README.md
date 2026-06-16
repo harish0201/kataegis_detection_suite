@@ -2,6 +2,10 @@
 
 A species-agnostic R-based toolkit for detecting and visualizing **kataegis** - localized clusters of hypermutation - from somatic variant data in Mutation Annotation Format (MAF) files. The suite includes a scriptable back-end library and an interactive Shiny web application for exploratory and publication-ready analysis.
 
+This has been a procrastinate app, for which I made the initial draft in 2025 October, and finally clearing off my plate.
+
+Note - The shiny app has the advantage of being able to pool/aggregate the samples in any order you want. Feel free to explore both the app and the attached scripts. The shiny app sources both the detection and plotting script.
+
 ---
 
 ## Table of Contents
@@ -112,7 +116,6 @@ Rscript -e "shiny::runApp('app.R')"
    - `Download Plot (PNG)` - saves the rendered rainfall plot
    - `Download Kataegis TSV` - saves the detected regions table
 
-Note - The shiny app has the advantage of being able to pool/aggregate the samples in any order you want. Feel free to explore both the app and the attached scripts. The shiny app sources both the detection and plotting script.
 ---
 
 ## Detection Module (`kataegis_detect.R`)
