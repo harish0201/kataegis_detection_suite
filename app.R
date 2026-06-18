@@ -2,7 +2,7 @@ library(shiny)
 library(data.table)
 library(DT)
 library(shinycssloaders)
-options(shiny.maxRequestSize = 500 * 1024^200)
+options(shiny.maxRequestSize = 500 * 1024^5)
 
 source("kataegis_detect.R")
 source("plots.R")
