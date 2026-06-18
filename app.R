@@ -4,7 +4,7 @@ library(DT)
 library(shinycssloaders)
 options(shiny.maxRequestSize = 500 * 1024^200)
 
-source("kataegis_detect2.R")
+source("kataegis_detect.R")
 source("plots.R")
 
 ui <- fluidPage(
