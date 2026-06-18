@@ -6,7 +6,9 @@ This has been a procrastinated app, for which I made the initial draft in 2025 O
 
 The shiny app has the advantage of being able to pool/aggregate the samples in any order you want. Feel free to explore both the app and the attached scripts. The shiny app sources both the detection and plotting script.
 
-Feel free to open an issue for enhancements, fixes etc.
+Feel free to open an issue for enhancements, fixes etc. The best way to use the app is to download the repo, and use the scripts directly as it offers more control on processing the data. The web-app allows basic plotting and exploratory functions.
+
+The app is now available here: https://hsk0201.shinyapps.io/kataegis_detection_suite/
 
 ---
 
