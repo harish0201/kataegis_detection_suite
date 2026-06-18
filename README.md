@@ -122,8 +122,7 @@ Rscript -e "shiny::runApp('app.R')"
 
 ## Detection Module (`kataegis_detect.R`)
 
-**Author:** Harish Kothandaraman  
-**Inspired by:** `maftools::detect_kataegis` (changepoint approach) and `katdetectr` (IMD function)
+**Inspired by:** `maftools:::detect_kataegis` (changepoint approach) and `katdetectr` (IMD function)
 
 Source this file to use the detection functions in a script:
 
@@ -341,7 +340,7 @@ The resulting cutoff is capped at 1000 bp to prevent overly permissive threshold
 
 **Deque detection algorithm (`kataegis_detect.R`)**
 
-The core sliding deque algorithm was originally devised by **Moritz Goretzky (WWU Münster)** and underlies the detection logic in [`maftools::detect_kataegis`](https://github.com/PoisonAlien/maftools) (Mayakonda et al.). The detection scaffolding in this project is structurally inspired by that implementation. `maftools` is distributed under the **MIT License**.
+The core sliding deque algorithm was originally devised by **Moritz Goretzky (WWU Münster)** and underlies the detection logic in [`maftools:::detect_kataegis`](https://github.com/PoisonAlien/maftools) (Mayakonda et al.). The detection scaffolding in this project is structurally inspired by that implementation. `maftools` is distributed under the **MIT License**.
 
 > Detection logic adapted from `maftools` (MIT License) - Anand Mayakonda / PoisonAlien.  
 > Original deque algorithm: Moritz Goretzky, WWU Münster.
